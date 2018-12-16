@@ -26,7 +26,6 @@ def  teste():
             'to':datetime(year=int(maxDateParts[0]), month=int(maxDateParts[1]), day=int(maxDateParts[2])) }
   
     query = 'acidente viação'
-  
     apt =  ArquivoPT()
     search_result = apt.getResult(query=query, **params)
     search_result_serialized = apt.toStr(search_result) 
