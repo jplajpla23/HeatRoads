@@ -1,23 +1,37 @@
 from flask import Flask, Response, render_template
+from datetime import datetime
 from contamehistorias.datasources.webarchive import ArquivoPT
 from datetime import datetime
+from flask import request
+
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
     return render_template('home.html')
 
-@app.route('/heat')
+@app.route('/heat',methods=['POST'])
 def  teste():
-    domains = [ 'http://publico.pt/','https://www.dn.pt/']
+    sites=request.form.get('sites')
+    minDate=request.form.get('inicio')
+    minDateParts=minDate.split('-')
+    maxDate=request.form.get('fim')
+    maxDateParts=maxDate.split('-')
+    # Specify website and time frame to restrict your query
+    domains=sites.split(',')
+    #domains = [ 'http://publico.pt/', 'http://www.rtp.pt/','http://www.dn.pt/', 'http://news.google.pt/',]
+
     params = { 'domains':domains, 
-            'from':datetime(year=2016, month=1, day=20), 
-            'to':datetime(year=2017, month=12, day=10) }
-    query = 'Acidente viação'
+            'from':datetime(year=int(minDateParts[0]), month=int(minDateParts[1]), day=int(minDateParts[2])), 
+            'to':datetime(year=int(maxDateParts[0]), month=int(maxDateParts[1]), day=int(maxDateParts[2])) }
+  
+    query = 'acidente viação'
+  
     apt =  ArquivoPT()
     search_result = apt.getResult(query=query, **params)
-    return str(len(search_result))
-
+    search_result_serialized = apt.toStr(search_result) 
+    search_result = apt.toObj( search_result_serialized )
+    return "ok"
     #var =" "
     #import spacy
     #nlp = spacy.load('pt_core_news_sm')

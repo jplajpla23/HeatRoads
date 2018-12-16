@@ -30,10 +30,10 @@
 		<h1 class="mb-5">HeatsRoads</h1><h3>Arquivo.pt</h3><br>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form method="POST" action='/generate'>
+            <form method="POST" action='/heat'>
               <div class="form-row">
               
-                  <textarea class="form-control form-control-lg" placeholder="Write the websites list who you'd like use(delimiter ,)" required></textarea>
+                  <textarea class="form-control form-control-lg" placeholder="Write the websites list who you'd like use(delimiter ,)"name="sites" required></textarea>
                 </div><br>
                 <div class="form-row">
                   <br><label>Start Date</label><input id='min' type="date" class="form-control" name="inicio" onchange="setMin()" required>
