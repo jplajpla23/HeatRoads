@@ -22,9 +22,10 @@ def  teste():
     domains=sites.split(',')
     #domains = [ 'http://publico.pt/', 'http://www.rtp.pt/','http://www.dn.pt/', 'http://news.google.pt/',]
 
-    params = { 'domains':domains,
-            'from':datetime(year=int(minDateParts[0]), month=int(minDateParts[1]), day=int(minDateParts[2])),
+    params = { 'domains':domains, 
+            'from':datetime(year=int(minDateParts[0]), month=int(minDateParts[1]), day=int(minDateParts[2])), 
             'to':datetime(year=int(maxDateParts[0]), month=int(maxDateParts[1]), day=int(maxDateParts[2])) }
+  
     #query = 'acidente viação'
     query = 'acidente colisão'
     apt =  ArquivoPT()
@@ -32,16 +33,13 @@ def  teste():
     var = ""
     for s in search_result:
         nlp = spacy.load('pt_core_news_sm')
-        #nlp = spacy.load('en_core_web_sm')
         text = str(s.text)
         doc = nlp(text)
-        tokens = []
-        var+= "<h1 style=\"color:black!important;\">"+str(s.headline)+"</h1><div style=\"color:black!important;\">"+str(s.text)+"<br><br><a href='"+str(s.linkToExtractedText)+"'>Link to all Extracted Text</a></div>"
+        var+= "<h1 style=\"color:black!important;\">"+str(s.headline)+"</h1><div style=\"color:black!important;\">"+str(s.text)+"</div>"
         for token in doc.ents:
             if "LOC" == str(token.label_):
-                tokens.insert(len(tokens),str(token.text))
-                break
-        var+= "<br>"+''.join(tokens)+"<hr>"
+		var+= "<div style=\"color:red!important;\">" +str(token.text)+" "+ str(token.label_)+"</div><br>"
+        var+= "<hr>"
     return var
     #var =" "
     #import spacy
