@@ -1,66 +1,139 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>HeatRoads</title>
-  </head>
-  <!--<body  style="height:100%!important;background-image: url('https://cdn-images-1.medium.com/max/2000/1*AcYLHh0_ve4TNRi6HLFcPA.jpeg') ">-->
-<body style="background: #bdc3c7;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-">
-    <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top" style="opacity: 0.7">
-      <div class="container">
-        <a class="navbar-brand">HeatRoads</a>
-        
-      </div>
-    </nav>
+  <title>HeatRoads</title>
+</head>
+<!--<body  style="height:100%!important;background-image: url('https://cdn-images-1.medium.com/max/2000/1*AcYLHh0_ve4TNRi6HLFcPA.jpeg') ">-->
+  <body style="background: #bdc3c7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ">
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top" style="opacity: 0.7">
+    <div class="container">
+      <a class="navbar-brand">HeatRoads</a>
 
-    <!-- Masthead -->
-    <header class=" text-center" >
-      <div ></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            	<br>
-		<h1 class="mb-5">HeatsRoads</h1><h3>Arquivo.pt</h3><br>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form method="POST" action='/heat'>
-              <div class="form-row">
-              
-                  <textarea class="form-control form-control-lg" placeholder="Write the websites list who you'd like use(delimiter ,)"name="sites" required></textarea>
-                </div><br>
-                <div class="form-row">
-                  <br><label>Start Date</label><input id='min' type="date" class="form-control" name="inicio" onchange="setMin()" required>
-                  <br><label>End Date</label><input id='max' type="date" class="form-control" name="fim" onchange="setMax()" required>
-				  <script>
-				  function setMin(){
-					document.getElementById('max').setAttribute('min',document.getElementById('min').value);
-				  }
-				  function setMax(){
-				  document.getElementById('min').setAttribute('max',document.getElementById('max').value);
-				  }
-				  </script>
-                  <br><br>
-                </div>
+    </div>
+  </nav>
 
-                <div class="col-14 col-md-4">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Heat Now!</button>
-                </div>
-              </div>
-            </form>
-          </div>
+  <!-- Masthead -->
+  <header class=" text-center" >
+    <div ></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+         <br>
+         <h1 class="mb-5">HeatsRoads</h1><h3>Arquivo.pt</h3><br>
+       </div>
+       <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <form method="POST" action='/heat'>
+          <div class="form-row">
+
+            <textarea class="form-control form-control-lg" placeholder="Write the websites list who you'd like use(delimiter ,)"name="sites" required></textarea>
+          </div><br>
+          <div class="form-row">
+            <br><label>Start Date</label><input id='min' type="date" class="form-control" name="inicio" onchange="setMin()" required>
+            <br><label>End Date</label><input id='max' type="date" class="form-control" name="fim" onchange="setMax()" required>
+            <script>
+              function setMin(){
+               document.getElementById('max').setAttribute('min',document.getElementById('min').value);
+             }
+             function setMax(){
+              document.getElementById('min').setAttribute('max',document.getElementById('max').value);
+            }
+          </script>
+          <br><br>
+
+        </div>
+        <div class="form-row">
+          <center style="margin-left: 45%;">
+            <label>PT</label> / <label>EN</label><br>
+          <label class="switch">
+            <input id="lang" name="lang" type="checkbox" value="EN">
+            <span class="slider"></span>
+          </label>
+</center>
+        </div>
+        <div class="col-14 col-md-4">
+          <button type="submit" class="btn btn-block btn-lg btn-primary">Heat Now!</button>
         </div>
       </div>
-    </header>
+    </form>
+  </div>
+</div>
+</div>
+</header>
 
-  </body>
+</body>
+<style type="text/css">
+  /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
 </html>

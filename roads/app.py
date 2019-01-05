@@ -18,6 +18,7 @@ def  teste():
     minDateParts=minDate.split('-')
     maxDate=request.form.get('fim')
     maxDateParts=maxDate.split('-')
+    lang=request.form.get('lang')
     # Specify website and time frame to restrict your query
     domains=sites.split(',')
     #domains = [ 'http://publico.pt/', 'http://www.rtp.pt/','http://www.dn.pt/', 'http://news.google.pt/',]
@@ -26,22 +27,28 @@ def  teste():
             'from':datetime(year=int(minDateParts[0]), month=int(minDateParts[1]), day=int(minDateParts[2])),
             'to':datetime(year=int(maxDateParts[0]), month=int(maxDateParts[1]), day=int(maxDateParts[2])) }
     #query = 'acidente viação'
+    #https://spacy.io/api/annotation#named-entities
     query = 'acidente colisão'
     apt =  ArquivoPT()
     search_result = apt.getResult(query=query, **params)
-    var = ""
-    for s in search_result:
+    if lang== "EN":
+        nlp = spacy.load('en_core_web_sm')
+        var = "EN<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+    else:
         nlp = spacy.load('pt_core_news_sm')
-        #nlp = spacy.load('en_core_web_sm')
+        var = "PT<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+    for s in search_result:
         text = str(s.text)
         doc = nlp(text)
         tokens = []
-        var+= "<h1 style=\"color:black!important;\">"+str(s.headline)+"</h1><div style=\"color:black!important;\">"+str(s.text)+"<br><br><a href='"+str(s.linkToExtractedText)+"'>Link to all Extracted Text</a></div>"
+        var+= "<h1 style=\"color:black!important;\">"+str(s.headline)+"</h1><div style=\"color:black!important;\">"+str(s.text)+"<br><br><a href='"+str(s.linkToExtractedText)+"'>Link to all Extracted Text</a><br><br></div>"
         for token in doc.ents:
-            if "LOC" == str(token.label_):
-                tokens.insert(len(tokens),str(token.text))
-                break
-        var+= "<br>"+''.join(tokens)+"<hr>"
+            aux=str(token.label_)
+            if  aux== "LOC" or aux == "GPE": 
+                var+= str(token.text)+" ----> <span style=\"color:red;\">"+ aux+"</span><br>"
+            else:
+                var+= str(token.text)+" ----> <span style=\"color:black;\">"+ aux+"</span><br>"
+        var+= "<hr>"
     return var
     #var =" "
     #import spacy
