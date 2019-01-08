@@ -33,10 +33,10 @@ def  teste():
     search_result = apt.getResult(query=query, **params)
     if lang== "EN":
         nlp = spacy.load('en_core_web_sm')
-        var = "EN<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+        var = "<style>body{background: linear-gradient(to left, rgb(44, 62, 80), rgb(189, 195, 199));padding-left: 25px;}</style>EN<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
     else:
         nlp = spacy.load('pt_core_news_sm')
-        var = "PT<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+        var = "<style>body{background: linear-gradient(to left, rgb(44, 62, 80), rgb(189, 195, 199));padding-left: 25px;}</style>PT<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
     for s in search_result:
         text = str(s.text)
         doc = nlp(text)
