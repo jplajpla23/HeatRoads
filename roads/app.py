@@ -11,6 +11,31 @@ app = Flask(__name__)
 def hello():
     return render_template('home.html')
 
+@app.route('/testeSpacy')
+def tes():
+    return render_template('homeSpacy.html')
+
+@app.route('/spacyRun',methods=['POST'])
+def  testeSpacy():
+    sites=request.form.get('sites')
+    lang=request.form.get('lang')
+    # Specify website and time frame to restrict your query
+    if lang== "EN":
+        nlp = spacy.load('en_core_web_sm')
+        var = "<style>body{background: linear-gradient(to left, rgb(44, 62, 80), rgb(189, 195, 199));padding-left: 25px;}</style>EN<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+    else:
+        nlp = spacy.load('pt_core_news_sm')
+        var = "<style>body{background: linear-gradient(to left, rgb(44, 62, 80), rgb(189, 195, 199));padding-left: 25px;}</style>PT<br><a href=\"https://spacy.io/api/annotation#named-entities\">Labels</a><hr><hr>"
+    text = str(sites)
+    doc = nlp(text)
+    tokens = []
+    var+= "<h1 style=\"color:black!important;\">Spacy Test</h1><div style=\"color:black!important;\">"+str(text)+"<br><br></div>"
+    for token in doc.ents:
+        aux=str(token.label_)
+        var+= str(token.text)+" ----> <span style=\"color:black;\">"+ aux+"</span><br>"
+    var+= "<hr>"
+    return var
+
 @app.route('/heat',methods=['POST'])
 def  teste():
     sites=request.form.get('sites')
